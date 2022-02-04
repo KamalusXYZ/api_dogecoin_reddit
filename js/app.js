@@ -2,9 +2,19 @@ let entree = 0 /**** Variable qui viendra se concatener à l url de l API apres 
 
 let compteur = 0 /**** Variable qui viendra se concatener à l url de l API apres skip, elle permet de skipper le nombre de message deja afficher, elle demarre a 0 et n'evolue qu'apres un premier 'submit' pour etre sur d'afficher au depart le premier message.   */
 
+let listeDeMoon = "" /***Bonus: permet d'initialiser la variable qui ajoute autant de O que d'entréé dans l'input au mot MOON (max = 27 pour pas casser l'affichage) */
+
+
 /**les selecteurs */
 let page = document.querySelector('.page')
 let envoyer = document.querySelector('#envoyer')
+let moon = document.querySelector('.moon')
+
+
+
+
+
+
 
 /***Fonction qui creer les div et remplit suivant les données recuperr dans les variable au dessus, cette function est rappelé plus bas (j'aurais pu optimiser le tout en un, mais je laisse comme ça par manque de tps) */
 const generateurMessage = () => {
@@ -54,6 +64,21 @@ const generateurMessage = () => {
 
 }
 
+const ajouterMoon = () => {
+    if (compteur > 27){return}
+
+    for(i=0 ; i < entree ; ++i){
+
+        listeDeMoon += "O"
+
+    }
+    console.log(listeDeMoon)
+    moon.innerHTML = `${listeDeMoon}`
+
+}
+
+
+
 /***Fonction  qui va recuperer la valeur de l'input, incrementer le compteur et lancer la fonction de creation plus haut */
 const recupererInput = () => {
 
@@ -66,6 +91,8 @@ if (entree !== null && entree !== '' && entree >0){
     generateurMessage()
     compteur = compteur + parseInt(entree)
     console.log(compteur)
+
+    ajouterMoon()
 
 }
 else {console.log("mauvaise saisi")}
